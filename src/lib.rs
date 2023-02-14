@@ -16,7 +16,7 @@ use std::fmt::Debug;
 use std::path::PathBuf;
 
 #[cfg(feature = "serde")]
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 pub use actions::*;
 pub use entries::*;
@@ -298,12 +298,12 @@ impl FilesNamed {
 
     #[cfg(feature = "regex")]
     pub fn regex(pattern: impl Into<String>) -> Self {
-        Self(EntryNamed::file(EntryName::Regex(pattern.into())))
+        Self(EntryNamed::any(EntryName::Regex(pattern.into())))
     }
 
     #[cfg(feature = "wildmatch")]
     pub fn wildmatch(pattern: impl Into<String>) -> Self {
-        Self(EntryNamed::file(EntryName::Wildmatch(pattern.into())))
+        Self(EntryNamed::any(EntryName::Wildmatch(pattern.into())))
     }
 
     pub fn within(&self, directory: impl Into<PathBuf>) -> ManyEntries {

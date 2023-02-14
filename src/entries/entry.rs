@@ -1,7 +1,7 @@
 use std::fmt::Debug;
 
 #[cfg(feature = "serde")]
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// Represents an entry name that can be of different types
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]

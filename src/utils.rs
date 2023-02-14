@@ -22,8 +22,14 @@ pub(crate) fn is_readable_entry(entity_type: &EntryType, entry: impl AsRef<Path>
     match entity_type {
         EntryType::File => is_readable_file(entry),
         EntryType::Folder => is_readable_folder(entry),
-        EntryType::Any => is_readable_file(entry) || is_readable_folder(entry),
+        EntryType::Any => is_readable(entry),
     }
+}
+
+/// Returns true if a given Path entry is readable,
+/// returns false if a given entry is not readable or does not exist
+pub(crate) fn is_readable(entry: impl AsRef<Path>) -> bool {
+    symlink_metadata(entry.as_ref()).is_ok()
 }
 
 /// Returns true if a given Path entry is a file (not a symlink and not a folder),
